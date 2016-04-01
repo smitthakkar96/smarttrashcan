@@ -43,4 +43,5 @@ def dustbin(id,completeness):
         return e
 
 if __name__ == '__main__':
+    app.host = "0.0.0.0"
     socketio.run(app)
