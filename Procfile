@@ -1,1 +1,1 @@
-web: gunicorn -k flask_sockets.worker example:app
+web: gunicorn -k flask_sockets.worker app:example
