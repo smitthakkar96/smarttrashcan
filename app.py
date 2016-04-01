@@ -1,8 +1,11 @@
 from flask import Flask,request,abort
 from models import model
 import json
+from flask_socketio import SocketIO,send,emit
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 @app.route('/api/dustbin',methods=['POST'])
 def dustbin():
@@ -16,6 +19,7 @@ def dustbin():
         dustbin_object = dustbin_object[0]
         dustbin_object.completeness = completeness
         dustbin_object.save()
+        send("hello",namespace='/chat')
         return "success"
     except:
         abort(400)
@@ -29,7 +33,8 @@ def get_dustbins():
         for key in d:
            data[key] = str(d[key])
         dict.append(data)
-    return json.dumps(data)
+    return json.dumps(dict)
 
 if __name__ == "__main__":
+    socketio.run(app)
     app.run(host="0.0.0.0",debug=True)
