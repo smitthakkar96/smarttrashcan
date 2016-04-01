@@ -20,10 +20,11 @@ def get_dustbins():
         dict.append(data)
     return json.dumps(dict)
 
-@socketio.on('my update')
-def test_message(message):
-    response = dustbin()
-    emit('update', response)
+@socketio.on('update trash')
+def update_trash(id,completeness):
+    response = dustbin(id,completeness)
+    import pdb; pdb.set_trace()
+    emit('update trash', str(response), broadcast=True)
 
 def dustbin(id,completeness):
     try:
@@ -45,4 +46,4 @@ def dustbin(id,completeness):
 if __name__ == '__main__':
     app.host = "0.0.0.0"
     app.debug = True
-    socketio.run(app,host="0.0.0.0",port=5000)
+    socketio.run(app,host="0.0.0.0")
