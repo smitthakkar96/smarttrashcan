@@ -6,3 +6,5 @@ class dustbin_data(DynamicDocument):
     completeness = StringField()
     weight = StringField(default=0)
 
+class codes(DynamicDocument):
+    code = StringField()

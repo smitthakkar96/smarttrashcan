@@ -33,6 +33,9 @@ def getQR():
     qr.make()
     im = qr.make_image()
     im.save(os.path.join(app.config['UPLOAD_FOLDER'],rand+'.jpg'))
+    codeobject = model.codes()
+    codeobject.code = rand
+    codeobject.save()
     return send_from_directory(app.config['UPLOAD_FOLDER'],rand+'.jpg')
 
 
