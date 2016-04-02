@@ -5,7 +5,6 @@ from flask_socketio import SocketIO,send,emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
 
 @app.route('/api/dustbin',methods=['POST'])
 def dustbin():
@@ -36,5 +35,4 @@ def get_dustbins():
     return json.dumps(dict)
 
 if __name__ == "__main__":
-    socketio.run(app)
     app.run(host="0.0.0.0",debug=True)
