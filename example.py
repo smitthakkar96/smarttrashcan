@@ -43,7 +43,9 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 @socketio.on('update trash')
-def update_trash(id,completeness):
+def update_trash(id):
+    id = id.split(';')[0]
+    completeness=id.split(';')[0]
     response = dustbin(id,completeness)
     import pdb; pdb.set_trace()
     emit('update trash', str(response), broadcast=True)
